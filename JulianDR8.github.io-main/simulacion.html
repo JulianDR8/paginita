@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juegos de Simulación</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <ul>
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="que es un videojuego.html">Qué es un videojuego</a></li>
+    <li><a href="historia de los videojuegos.html">Historia</a></li>
+    <li><a href="tienda de videojuegos.html">Tienda</a></li>
+  </ul>
+</nav>
+
+<div id="reloj">Cargando hora...</div>
+<script>
+  async function obtenerHoraInicial() {
+    try {
+      const respuesta = await fetch(`https://api.timezonedb.com/v2.1/get-time-zone?key=H4EX9OZHDS0P&format=json&by=zone&zone=America/Bogota`);
+      const datos = await respuesta.json();
+      const fechaHora = new Date(datos.formatted);
+      actualizarReloj(fechaHora);
+      setInterval(() => {
+        fechaHora.setSeconds(fechaHora.getSeconds() + 1);
+        actualizarReloj(fechaHora);
+      }, 1000);
+    } catch {
+      document.getElementById('reloj').textContent = 'Error obteniendo la hora';
+    }
+  }
+  function actualizarReloj(f) {
+    document.getElementById('reloj').textContent = `${String(f.getHours()).padStart(2, '0')}:${String(f.getMinutes()).padStart(2, '0')}:${String(f.getSeconds()).padStart(2, '0')}`;
+  }
+  obtenerHoraInicial();
+</script>
+
+<div class="contenido">
+  <h1>Juegos de Simulación</h1>
+  <p>Los juegos de simulación buscan imitar aspectos de la vida real. Ya sea pilotar un avión, construir ciudades o simular una vida diaria, estos juegos permiten experimentar diferentes actividades de forma realista.</p>
+
+  <h3>Ejemplos Populares</h3>
+  <ul class="lista-juegos">
+    <li>The Sims</li>
+    <li>Flight Simulator</li>
+    <li>SimCity</li>
+    <li>Euro Truck Simulator</li>
+    <li>Farming Simulator</li>
+  </ul>
+
+  <h3>Video Representativo</h3>
+  <iframe width="560" height="315" src="https://youtu.be/xlTuC18xVII?si=KE5zAZg9NKX74ZjQ" frameborder="0" allowfullscreen></iframe>
+</div>
+
+
+
+<footer class="footer">
+  <p>© 2024 Julian Rodriguez, Sebastian Arevalo. Todos los derechos reservados.</p>
+</footer>
+
+</body>
+</html>
