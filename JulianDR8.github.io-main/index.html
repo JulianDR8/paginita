@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<link rel="shortcut icon" type="image/x-icon"
+href="icono.jpg"
+<link rel="shortcut icon" type="image/x-icon" href="icono.jpg"> 
+
+
+
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Videojuegos</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Fuente Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+
+
+
+
+
+</head>
+<body>
+
+    <!-- menu la parte de arriba -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="que es un videojuego.html">Qué es un videojuego?</a></li>
+            <li><a href="historia de los videojuegos.html">Historia de los Videojuegos</a></li>
+            <li><a href="tienda de videojuegos.html">Tienda de Videojuegos</a></li>
+        </ul>
+    </nav>
+
+
+
+    <!-- contenido principal -->
+    <div class="contenido">
+        
+    <h1>¡Bienvenido a Nuestra Pagina de Videojuegos!</h1>
+    <p>Nos complace recibirte en nuestro rincón digital dedicado a los videojuegos. Aquí encontrarás una colección única de los títulos más populares, así como información sobre la historia, evolución y el impacto de los videojuegos en nuestra cultura. Navega, explora y descubre todo lo que tenemos preparado para ti. ¡Que comience la aventura!</p>
+</div>
+
+    </div>
+
+
+
+
+
+
+
+ <!-- ESTA ES LA API QUE LLAMAMOS DE LA PAGINA TIMEZONEDB QUE ES UN RELOJ QUE SE ACTUALIZA SOLO CADA CIERTO TIEMPO -->
+
+<div id="reloj">Cargando hora...</div>
+
+<script>
+  async function obtenerHoraInicial() {
+    try {
+      const respuesta = await fetch(`https://api.timezonedb.com/v2.1/get-time-zone?key=H4EX9OZHDS0P&format=json&by=zone&zone=America/Bogota`);
+      
+      if (!respuesta.ok) {
+        throw new Error(`Error en la respuesta: ${respuesta.status} - ${respuesta.statusText}`);
+      }
+
+      const datos = await respuesta.json();
+
+      if (datos.status !== "OK") {
+        throw new Error(`Error en la API: ${datos.message}`);
+      }
+
+      const fechaHora = new Date(datos.formatted);
+      actualizarReloj(fechaHora);
+      
+      // Inicia el reloj en tiempo real después de obtener la hora inicial
+      setInterval(() => {
+        fechaHora.setSeconds(fechaHora.getSeconds() + 1); // Incrementa un segundo
+        actualizarReloj(fechaHora);
+      }, 1000); // Actualiza cada segundo
+    } catch (error) {
+      console.error('Error obteniendo la hora:', error);
+      document.getElementById('reloj').textContent = 'Error obteniendo la hora';
+    }
+  }
+
+  function actualizarReloj(fechaHora) {
+    const horas = String(fechaHora.getHours()).padStart(2, '0');
+    const minutos = String(fechaHora.getMinutes()).padStart(2, '0');
+    const segundos = String(fechaHora.getSeconds()).padStart(2, '0');
+    document.getElementById('reloj').textContent = `${horas}:${minutos}:${segundos}`;
+  }
+
+  obtenerHoraInicial(); // Llama a la función para obtener la hora inicial y empezar el reloj
+</script> 
+
+
+    <!-- Sección de información -->
+    <div class="informacion">
+     
+        <div class="texto">
+            <h2>¿De qué trata esta página?</h2> 
+            <p>Bienvenido a nuestra página dedicada al fascinante mundo de los videojuegos. Aquí exploramos la historia de los videojuegos, desde sus humildes comienzos hasta la industria multimillonaria que conocemos hoy. Descubre cómo han evolucionado los juegos, los hitos más importantes, y las innovaciones que han definido generaciones. Además, te guiamos hacia las mejores plataformas virtuales donde puedes adquirir tus juegos favoritos, desde los clásicos de antaño hasta las últimas novedades. Sumérgete en el universo gamer y descubre todo lo que este mundo tiene para ofrecer.</p>
+        </div>
+
+
+        <!-- imagen que tiene la pagina -->
+        <div class="imagen">
+            <img src="pagp1.jpg" alt="Persona jugando videojuegos"> <!--imagen -->
+        </div>
+    </div>
+
+
+       <footer class="footer">
+        <p>© 2024 Julian Rodriguez, Sebastian Arevalo. Todos los derechos reservados.</p> <!--texto de la parte de abajo -->
+    </footer>
+
+</body>
+</html>

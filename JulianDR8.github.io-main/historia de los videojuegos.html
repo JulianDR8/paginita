@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+	<link rel="shortcut icon" type="image/x-icon"
+href="icono.jpg"
+<link rel="shortcut icon" type="image/x-icon" href="icono.jpg"> 
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historia de los Videojuegos</title>
+    <link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet" href="style.css"> <!-- direccion del css -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+    <!-- Menú de navegación -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="que es un videojuego.html">Que es un videojuego</a></li>
+            <li><a href="historia de los videojuegos.html">Historia de los Videojuegos</a></li>
+            <li><a href="tienda de videojuegos.html">Tienda de Videojuegos</a></li>
+        </ul>
+    </nav>
+
+   <div class="contenido">
+        
+    <h1>Los Videojuegos</h1>
+    <p>Los videojuegos comenzaron como simples experimentos tecnológicos en las décadas de 1950 y 1960, evolucionando rápidamente hacia juegos comerciales y sistemas de entretenimiento masivo. A lo largo de las décadas, las innovaciones en tecnología, diseño y accesibilidad han transformado los videojuegos en una industria multimillonaria que influye en la cultura popular y el entretenimiento global.</p>
+</div>
+
+    </div>
+
+	<!-- ESTA ES LA API QUE LLAMAMOS DE LA PAGINA TIMEZONEDB QUE ES UN RELOJ QUE SE ACTUALIZA SOLO CADA CIERTO TIEMPO -->
+
+<div id="reloj">Cargando hora...</div>
+
+<script>
+  async function obtenerHoraInicial() {
+    try {
+      const respuesta = await fetch(`https://api.timezonedb.com/v2.1/get-time-zone?key=H4EX9OZHDS0P&format=json&by=zone&zone=America/Bogota`);
+      
+      if (!respuesta.ok) {
+        throw new Error(`Error en la respuesta: ${respuesta.status} - ${respuesta.statusText}`);
+      }
+
+      const datos = await respuesta.json();
+
+      if (datos.status !== "OK") {
+        throw new Error(`Error en la API: ${datos.message}`);
+      }
+
+      const fechaHora = new Date(datos.formatted);
+      actualizarReloj(fechaHora);
+      
+      // Inicia el reloj en tiempo real después de obtener la hora inicial
+      setInterval(() => {
+        fechaHora.setSeconds(fechaHora.getSeconds() + 1); // Incrementa un segundo
+        actualizarReloj(fechaHora);
+      }, 1000); // Actualiza cada segundo
+    } catch (error) {
+      console.error('Error obteniendo la hora:', error);
+      document.getElementById('reloj').textContent = 'Error obteniendo la hora';
+    }
+  }
+
+  function actualizarReloj(fechaHora) {
+    const horas = String(fechaHora.getHours()).padStart(2, '0');
+    const minutos = String(fechaHora.getMinutes()).padStart(2, '0');
+    const segundos = String(fechaHora.getSeconds()).padStart(2, '0');
+    document.getElementById('reloj').textContent = `${horas}:${minutos}:${segundos}`;
+  }
+
+  obtenerHoraInicial(); // Llama a la función para obtener la hora inicial y empezar el reloj
+</script> 
+
+
+
+
+
+
+<!-- Sección de información -->
+    <div class="informacion">
+     
+        <div class="texto">
+           <h2>Historia.</h2>
+<div class="historia-parrafo">
+    <p>La historia de los videojuegos es una de innovación constante y evolución tecnológica, que ha transformado lo que comenzó como simples experimentos en sistemas complejos que hoy definen gran parte del entretenimiento digital. A lo largo de las décadas, los videojuegos han pasado de ser una curiosidad para algunos a convertirse en una industria multimillonaria, influyendo no solo en la cultura popular, sino también en las tecnologías que usamos a diario.</p>
+</div>
+
+
+
+<div class="historia-parrafo">
+    <p>Lo que empezó como un pasatiempo para unos pocos se ha convertido en una forma de arte en su propio derecho, abarcando géneros que van desde la acción hasta la educación, el deporte y la simulación. Además, los videojuegos han servido como plataformas para la narración interactiva, ofreciendo a los jugadores experiencias inmersivas que rivalizan con las películas o los libros. En esta sección, exploraremos los eventos más importantes que marcaron el rumbo de la industria y cómo estos momentos clave continúan influyendo en el presente y futuro de los videojuegos.</p>
+</div>
+
+
+        </div>
+
+
+        <!-- imagen que tiene la pagina -->
+        <div class="imagen">
+            <img src="R.jpg" alt="Persona jugando videojuegos"> <!--imagen -->
+        </div>
+    </div>
+
+
+    <footer class="footer">
+        <p>© 2024 Julian Rodriguez, Sebastian Arevalo. Todos los derechos reservados.</p> <!--texto de la parte de abajo -->
+    </footer>
+
+</body>
+
+<div class="tabla-container">
+    <h2 class="titulo-evolucion">La Evolución de los Videojuegos</h2>
+
+    <table class="linea-tiempo">
+        <thead>
+            <tr>
+                <th>Año</th>
+                <th>Evento</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1958</td>
+                <td>Se crea <strong>Tennis for Two</strong>, uno de los primeros videojuegos.</td>
+            </tr>
+            <tr>
+                <td>1962</td>
+                <td>Se desarrolla <strong>Spacewar!</strong>, uno de los primeros juegos digitales.</td>
+            </tr>
+            <tr>
+                <td>1972</td>
+                <td>Se lanza <strong>Pong</strong>, el primer videojuego arcade comercialmente exitoso.</td>
+            </tr>
+            <tr>
+                <td>1977</td>
+                <td>Atari lanza la consola <strong>Atari 2600</strong>, popularizando los videojuegos en el hogar.</td>
+            </tr>
+            <tr>
+                <td>1980</td>
+                <td><strong>Pac-Man</strong> se convierte en un fenómeno mundial.</td>
+            </tr>
+            <tr>
+                <td>1985</td>
+                <td>Se lanza la <strong>Nintendo Entertainment System (NES)</strong> con <strong>Super Mario Bros.</strong>.</td>
+            </tr>
+            <tr>
+                <td>1991</td>
+                <td>Sega lanza la <strong>Sega Genesis</strong> con <strong>Sonic the Hedgehog</strong>.</td>
+            </tr>
+            <tr>
+                <td>1996</td>
+                <td>Nintendo lanza el <strong>Nintendo 64</strong> con gráficos en 3D.</td>
+            </tr>
+            <tr>
+                <td>2001</td>
+                <td>Microsoft lanza la <strong>Xbox</strong> junto con <strong>Halo: Combat Evolved</strong>.</td>
+            </tr>
+            <tr>
+                <td>2006</td>
+                <td>Nintendo lanza la <strong>Wii</strong> con controles de movimiento innovadores.</td>
+            </tr>
+            <tr>
+                <td>2013</td>
+                <td>Se lanzan la <strong>PlayStation 4</strong> y la <strong>Xbox One</strong>.</td>
+            </tr>
+            <tr>
+                <td>2020</td>
+                <td>Se lanzan la <strong>PlayStation 5</strong> y la <strong>Xbox Series X</strong>.</td>
+            </tr>
+        </tbody>
+    </table>
+
+<footer class="footer">
+        <p>© 2024 Julian Rodriguez, Sebastian Arevalo. Todos los derechos reservados.</p> <!--texto de la parte de abajo -->
+    </footer>
+
+
+</div>
+
+
+
+</html>
