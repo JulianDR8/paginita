@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<link rel="shortcut icon" type="image/x-icon"
+href="icono.jpg"
+<link rel="shortcut icon" type="image/x-icon" href="icono.jpg"> 
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Videojuegos</title>
+    <link rel="stylesheet" href="style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Menú de navegación -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="que es un videojuego.html">Que es un videojuego</a></li>
+            <li><a href="historia de los videojuegos.html">Historia de los Videojuegos</a></li>
+            <li><a href="tienda de videojuegos.html">Tienda de Videojuegos</a></li>
+        </ul>
+    </nav>
+
+    <!-- Contenido de la página -->
+    <div class="contenido">
+        <h1>Los Videojuegos</h1>
+    <p>En la era digital, las tiendas de videojuegos virtuales han revolucionado la forma en que accedemos a nuestros títulos favoritos. Ya no es necesario desplazarse a una tienda física; con solo un clic, puedes explorar una vasta biblioteca de juegos desde la comodidad de tu hogar.</p>
+</div>
+
+    </div>
+
+
+	<!-- ESTA ES LA API QUE LLAMAMOS DE LA PAGINA TIMEZONEDB QUE ES UN RELOJ QUE SE ACTUALIZA SOLO CADA CIERTO TIEMPO -->
+
+<div id="reloj">Cargando hora...</div>
+
+<script>
+  async function obtenerHoraInicial() {
+    try {
+      const respuesta = await fetch(`https://api.timezonedb.com/v2.1/get-time-zone?key=H4EX9OZHDS0P&format=json&by=zone&zone=America/Bogota`);
+      
+      if (!respuesta.ok) {
+        throw new Error(`Error en la respuesta: ${respuesta.status} - ${respuesta.statusText}`);
+      }
+
+      const datos = await respuesta.json();
+
+      if (datos.status !== "OK") {
+        throw new Error(`Error en la API: ${datos.message}`);
+      }
+
+      const fechaHora = new Date(datos.formatted);
+      actualizarReloj(fechaHora);
+      
+      // Inicia el reloj en tiempo real después de obtener la hora inicial
+      setInterval(() => {
+        fechaHora.setSeconds(fechaHora.getSeconds() + 1); // Incrementa un segundo
+        actualizarReloj(fechaHora);
+      }, 1000); // Actualiza cada segundo
+    } catch (error) {
+      console.error('Error obteniendo la hora:', error);
+      document.getElementById('reloj').textContent = 'Error obteniendo la hora';
+    }
+  }
+
+  function actualizarReloj(fechaHora) {
+    const horas = String(fechaHora.getHours()).padStart(2, '0');
+    const minutos = String(fechaHora.getMinutes()).padStart(2, '0');
+    const segundos = String(fechaHora.getSeconds()).padStart(2, '0');
+    document.getElementById('reloj').textContent = `${horas}:${minutos}:${segundos}`;
+  }
+
+  obtenerHoraInicial(); // Llama a la función para obtener la hora inicial y empezar el reloj
+</script> 
+
+
+
+
+
+
+<!-- Sección de información -->
+    <div class="informacion">
+     
+        
+
+<div class="imagen">
+            <img src="eneba.jpg" alt="Tienda Eneba"> <!--imagen -->
+        </div>
+    
+
+<div class="imagen">
+            <img src="steam.jpg" alt="Tienda Steam"> <!--imagen -->
+        </div>
+   
+
+<div class="imagen">
+            <img src="epicgames.jpg" alt="Tienda EpicGames"> <!--imagen -->
+        </div>
+    </div>
+
+</div>
+
+
+
+
+    <footer class="footer">
+        <p>© 2024 Julian Rodriguez, Sebastian Arevalo. Todos los derechos reservados.</p> <!--texto de la parte de abajo -->
+    </footer>
+
+</body>
+
+
+
+
+  <body>
+   <div class="slider-container">
+            <div class="slider">
+                <a href="https://store.steampowered.com" target="_blank" class="slider-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam">
+                </a>
+                <a href="https://www.epicgames.com/store/es/" target="_blank" class="slider-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/31/Epic_Games_logo.svg" alt="Epic Games">
+                </a>
+                <a href="https://www.eneba.com" target="_blank" class="slider-item">
+                    <!-- Nueva imagen de Eneba -->
+                    <img src="https://play-lh.googleusercontent.com/2wv6AqeAPvxsKpXgmkHz0C0abyJl3IbZQ5fLoRMuiji2SOkfttwUFEBnL9mHNgEvq1bu" alt="Eneba">
+                </a>
+
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+            
+        </div>
+    </div>
+ <script>
+        let currentIndex = 0;
+        const items = document.querySelectorAll('.slider-item');
+        const totalItems = items.length;
+        const slider = document.querySelector('.slider');
+        const repeatTimes = 4;  // Número de veces que quieres que se repita la imagen
+
+        // Función para mostrar la imagen actual repetida varias veces
+        function showRepeatedImage(index) {
+            slider.innerHTML = '';  // Limpiamos el contenido anterior del slider
+            for (let i = 0; i < repeatTimes; i++) {
+                const clone = items[index].cloneNode(true);  // Clonamos la imagen actual
+                slider.appendChild(clone);  // La agregamos al slider repetidamente
+            }
+        }
+
+        // Función para cambiar a la siguiente imagen y repetirla
+        function showNextImage() {
+            currentIndex = (currentIndex + 1) % totalItems;  // Mover al siguiente índice
+            showRepeatedImage(currentIndex);  // Mostrar la imagen repetida
+        }
+
+        // Inicializamos el slider mostrando la primera imagen repetida
+        showRepeatedImage(currentIndex);
+
+        // Cambia la imagen cada 5 segundos
+        setInterval(showNextImage, 5000);
+    </script>
+
+
+ 
+</body>
+
+</html>
